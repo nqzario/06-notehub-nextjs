@@ -40,8 +40,8 @@ export const fetchNotes = async (
   return response.data;
 };
 
-export const fetchNoteById = async (noteId: string) => {
-  const response = await axios.get(`/notes/${noteId}`, {
+export const fetchNoteById = async (noteId: string): Promise<Note> => {
+  const response = await axios.get<Note>(`/notes/${noteId}`, {
     headers: {
       Authorization: `Bearer ${VITE_NOTEHUB_TOKEN}`,
     },
@@ -60,7 +60,9 @@ export const createNote = async (
   return response.data;
 };
 
-export const deleteNote = async (noteId: string) => {
+export const deleteNote = async (
+  noteId: string
+): Promise<DeleteNoteResponse> => {
   const response = await axios.delete<DeleteNoteResponse>(`/notes/${noteId}`, {
     headers: {
       Authorization: `Bearer ${VITE_NOTEHUB_TOKEN}`,
